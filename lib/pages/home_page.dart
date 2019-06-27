@@ -75,15 +75,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
       });
     });
   }
-
-
-   //跳转搜索页面
-  void _jumpToSearch() {
-    NavigatorUtil.push(
-        context,
-        SearchPage());
-  }
-
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -111,16 +103,8 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   /*搜索栏*/
   Widget get _appBar {
 
-    return  SearchAppBarWidget(
-              elevation: 2.0,
-              inputBoxClick: _jumpToSearch,
-              leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  highlightColor: Colors.black,
-                  onPressed: () {
-                    //Navigator.pop(context);
-                  }),
-               ); 
+    return  SearchBar();
+             
 
   }
  

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/comment_page.dart';
 import 'package:flutter_demo/pages/detail_page/swiper_detail_page.dart';
 import 'package:flutter_demo/util/bar_util.dart';
+import 'package:flutter_demo/util/common.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/app_bar_container.dart';
  
@@ -35,12 +36,27 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var swiper = SwiperDetailPage(bannerList: images);    
-    
-    return Scaffold(
-      appBar:  _appBar,
+     
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Container(
+          child: Scaffold(
+            appBar: _appBar,
+            body: _listView
+          ),
+        ),
+      ) ,
+    );
+  }
 
-      body: ListView(
+  Widget get _appBar{
+    return AppBarSetting(title:'详情').arrowBack(context);
+  }
+
+  Widget get _listView {
+    var swiper = SwiperDetailPage(bannerList: images); 
+    return ListView(
         children: <Widget>[
           Container(
             height: 300,
@@ -263,12 +279,8 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 
-  Widget get _appBar{
-   
-    return AppBarSetting(title:'详情').arrowBack(context);
-  }
+
 }

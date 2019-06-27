@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter_Demo',
       debugShowCheckedModeBanner: false,  // Flutter去除右上角Debug标签
       theme: ThemeData(
-        primaryColor: Color(ColorConfig.appBarColor),
-        backgroundColor: Color(ColorConfig.backgroundColor)
+         primaryColor: Color(ColorConfig.appBarColor),
+         backgroundColor: Color(ColorConfig.backgroundColor)
       ),
       localizationsDelegates: [                              
         GlobalMaterialLocalizations.delegate,

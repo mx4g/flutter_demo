@@ -5,7 +5,6 @@ import 'package:flutter_demo/pages/home_page.dart';
 import 'package:flutter_demo/pages/category_page.dart';
 import 'package:flutter_demo/pages/cart_page.dart';
 import 'package:flutter_demo/pages/member_page.dart';
-import 'package:flutter_demo/pages/tab_page.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
@@ -102,26 +101,25 @@ class _TabNavigatorState extends State<TabNavigator> {
     //假如设计稿是按iPhone6的尺寸设计的(iPhone6 750*1334) 
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);  
 
-    return  Scaffold(
-
-      body:  WillPopScope(
-
-        child: PageView(
-            physics: NeverScrollableScrollPhysics(),
-            controller: _controller,
-            children: <Widget>[
-              HomePage(),
-              CategoryPage(),
-              CartPage(),
-              MemberPage()
-          
-            ],
-        ),
-
-        onWillPop: exitApp,
-
-      ),
-
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        
+        child:Scaffold(
+          body: WillPopScope(
+            child: PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _controller,
+                children: <Widget>[
+                  HomePage(),
+                  CategoryPage(),
+                  CartPage(),
+                  MemberPage()
+                ],
+            ),
+            onWillPop: exitApp,
+          ),
+      
       bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 12,
           unselectedFontSize: 12,
@@ -141,7 +139,10 @@ class _TabNavigatorState extends State<TabNavigator> {
           
           ]
         ),
-    );
+      )
+    ),
+  );
+      
   }
 }
 

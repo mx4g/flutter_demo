@@ -55,15 +55,7 @@ class _CategoryPageState extends State<CategoryPage> {
   int _grey3 = ColorConfig.grey3;
 
   int _fontColor = ColorConfig.fontColor2;
-
-   //跳转搜索页面
-  void _jumpToSearch() {
-    NavigatorUtil.push(
-        context,
-        SearchPage());
-  }
-
-
+ 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -82,9 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
   /*搜索栏*/
   Widget get _appBar {
 
-    return SearchAppBarWidget(
-      inputBoxClick: _jumpToSearch,
-    ); 
+    return SearchBar(); 
 
   }
 

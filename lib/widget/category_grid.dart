@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/base_config.dart';
+import 'package:flutter_demo/pages/test_page.dart';
+import 'package:flutter_demo/util/navigator_util.dart';
  
 class CategoryGrid extends StatelessWidget {
  
@@ -31,7 +33,7 @@ class CategoryGrid extends StatelessWidget {
   Widget _item(context, text){
 
     return InkWell(
-      onTap: (){   },
+      onTap: (){ NavigatorUtil.push(context, TestPage());   },
       child: Column(
         children: <Widget>[
           _pic,

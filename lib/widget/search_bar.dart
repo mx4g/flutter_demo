@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_demo/config/base_config.dart';
+import 'package:flutter_demo/pages/search_page.dart';
+import 'package:flutter_demo/util/navigator_util.dart';
+import 'package:flutter_demo/widget/app_bar_container.dart';
 
-//实现PreferredSizeWidget，否则不能作为appBar控件引用
-
-class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
-  final double height;
+class SearchBar extends StatefulWidget with PreferredSizeWidget {
+ 
+  final double barHeight;
   final double elevation; //阴影
   final Widget leading;
   final String hintText;
@@ -14,14 +15,16 @@ class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final bool normalSearch;
   final int inputBgColor;
   final int barBgColorl;
+  final int borderColor; 
   final Color fontColor;
   final double fontSize;
   final double inputBoxHeight;
-  final void Function() inputBoxClick;  
-  
 
-  const SearchAppBarWidget(
-      {this.height: 76.0,
+ 
+
+  SearchBar(
+    {
+      this.barHeight: 44.0,
       this.elevation: 0.5,
       this.leading,
       this.hintText: '搜索',
@@ -30,87 +33,73 @@ class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
       this.prefixIcon=Icons.search,
       this.inputBgColor = 0xFFE6E6E6,
       this.barBgColorl = ColorConfig.appBarColor,
+      this.borderColor = ColorConfig.grey3,
       this.fontColor = Colors.black38,
       this.fontSize = 16,
       this.inputBoxHeight = 34,
-      this.inputBoxClick});
-  
-  _SearchAppBarState createState() =>  _SearchAppBarState();
-  
+    });
+
+
+  _SearchBarState createState() => _SearchBarState();
+
   @override
-  Size get preferredSize => Size.fromHeight(height);//这里设置控件（appBar）的高度
+  Size get preferredSize => Size.fromHeight(barHeight);
 }
 
-
-class _SearchAppBarState extends State<SearchAppBarWidget> {
+class _SearchBarState extends State<SearchBar>  {
+  TextEditingController _controller = new TextEditingController();
   bool _hasdeleteIcon = false;
-  final TextEditingController _controller = TextEditingController();
-  int _grey = ColorConfig.grey3;
 
   @override
   Widget build(BuildContext context) {
-     
-    return !widget.normalSearch ? _inputBox : _normalInputBox;
-    
+    return ! widget.normalSearch ? inputBox(context) : normalInputBox();
   }
 
-  
-  Widget get _inputBox {
+  Widget normalInputBox(){
 
-    return PreferredSize(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: widget.height,
-                decoration: BoxDecoration(
-                  color: Color(widget.barBgColorl),
-                  border: Border(bottom: BorderSide(color: Color(_grey)))
-                ),
+    return  appBarContainer(_normalInputBlock);
+  }
+ 
+  Widget inputBox(BuildContext context) {
+ 
+    return appBarContainer(_inputBlock);
+  
+  }
+
+  Widget  appBarContainer(contentBox){
+    return AppBarContainer(
+          height: widget.barHeight,
+          actions: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsetsDirectional.only(top: 6,bottom: 6),
+              width: MediaQuery.of(context).size.width,
+              height: 44,
+              color: Color(widget.barBgColorl),
+              child: contentBox,
+            )
+          ],
+        );
+  }
+  
+  Widget get _normalInputBlock {
+
+    return InkWell(
+      onTap: (){
+         _jumpToSearch();
+      },
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child:Container(
+              margin: EdgeInsetsDirectional.only(start: 16,end: 16),
+              height: widget.inputBoxHeight,
+              decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(4),
               ),
-              Row(
-                children: <Widget>[
-                  _backIcon,
-                  Expanded(
-                    flex: 1,
-                    child: _inputBlock,
-                  ),
-                  _searchBtn
-                ],
-              )
-            ],
-          ),
-         
-          preferredSize: Size.fromHeight(widget.height));
-  }
-  
-  Widget get _normalInputBox {
-
-    return PreferredSize(
-     
-     child: Stack(
-       children: <Widget>[
-         Container(
-           height: widget.height,
-           decoration: BoxDecoration(
-             color: Color(widget.barBgColorl),
-             border: Border(bottom: BorderSide(color: Color(_grey)))
-           ),
-         ),         
-         GestureDetector(
-           onTap: (){
-              if(widget.inputBoxClick !=null) 
-                  widget.inputBoxClick();
-              
-           },
-           child: Container(
-             height: widget.inputBoxHeight,
-             margin: EdgeInsetsDirectional.only(start: 16.0,end: 16.0,top: 33.0),
-             decoration: BoxDecoration(
-               color: Color(widget.inputBgColor),
-               borderRadius: BorderRadius.circular(4)
-               
-             ),
-             child: Row(
+              child: Row(
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsetsDirectional.only(start:5,top:2,end: 5),
@@ -124,18 +113,37 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
                     widget.hintText,style: TextStyle(color: widget.fontColor,fontSize: widget.fontSize),                 
                   )
                 ],
-           ),
+              ),
+            ) ,
           )
-         )
-       ],
-     ),
-     preferredSize: Size.fromHeight(widget.height),
-   );
-
+        ],
+      ),
+    );
   }
+  
+  Widget get _inputBlock {
 
-  Widget get _input {
+    return
+      Row(
+        children: <Widget>[
+         
+          //BackBtn 返回按钮
+          _backBtn,
+
+          //inputBox 
+          _inputBox,
+          
+          //searchBtn
+          _searchBtn
+        
+        ],
+      ); 
     
+    
+  }
+ 
+  Widget get _input {
+ 
     return TextField(
       autofocus: true,
       controller: _controller,
@@ -161,72 +169,95 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
             _hasdeleteIcon = false;
           } else {
             _hasdeleteIcon = true;
-          }
+          } 
         });
-      },
-      onEditingComplete: widget.onEditingComplete);
+        },
+
+      onEditingComplete: widget.onEditingComplete 
+      );
+     
+       
       
   }
 
-  Widget get _inputBlock {
+  Widget get _inputBox {
 
-    return Container(
-      height: widget.inputBoxHeight,
-      margin: EdgeInsetsDirectional.only(end: 10.0,top: 33.0),
-      decoration: BoxDecoration(
-        color: Color(widget.inputBgColor),
-        borderRadius: BorderRadius.circular(4)
-      ),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsetsDirectional.only(start:5,top:2,end: 5),
-            child: Icon(
-                Icons.search,
-                size: 24,
-                color: widget.fontColor,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: _input,
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.only(start:5,top:2,end: 5),
-            child: _hasdeleteIcon ? _deleteIcon : Text('')
-          ),
-        ],
-      ),
-    );
-  } 
-
-  Widget get _searchBtn {
-
-    return  Container(
-      height: 26,
-      width: 66,
-      margin: EdgeInsetsDirectional.only(top: 30.0,end: 8),
-      child: FlatButton(
-   
-        onPressed: (){
-
-        },
-        child: Text("搜索",style: TextStyle(color: widget.fontColor),),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5)
+    return  Expanded(
+      flex: 1,
+      child:Container(
+        margin: EdgeInsetsDirectional.only(start: 8,end: 8),
+        height: widget.inputBoxHeight,
+        decoration: BoxDecoration(
+          color: Colors.black12,
+          borderRadius: BorderRadius.circular(10),
         ),
-      ),
+        child: Row(
+          children: <Widget>[
+
+            //searchIcon
+            Padding(
+              padding: EdgeInsetsDirectional.only(start:5,top:3,end: 5),
+              child: Icon(
+                  Icons.search,
+                  size: 24,
+                  color: widget.fontColor,
+              ),
+            ),
+
+            //input
+            Expanded(
+              flex: 1,
+              child: _input,
+            ),
+
+            //inputDeleteBtn
+            Padding(
+              padding: EdgeInsetsDirectional.only(end:5),
+              child: _hasdeleteIcon ? _deleteIcon : Text('')
+            ),
+
+          ],
+        ),
+      ) ,
     );
+
+  }
+  
+  Widget get _searchBtn {
+ 
+    return Container(
+        margin: EdgeInsetsDirectional.only(end: 10),
+        
+        width: 50,
+        height: 30,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Colors.orange, Colors.red]),
+          borderRadius: BorderRadius.circular(34)
+
+        ),
+        child: FlatButton (
+         padding:EdgeInsets.all(0),
+         onPressed: (){
+
+         },
+         child: Text("搜索",style: TextStyle(color: Colors.white,fontSize: 14),),
+         shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(34)
+         ),
+        ),
+        
+     );
   }
   
   Widget get _deleteIcon {
     
     return new GestureDetector(
       onTap: (() {
-        setState(() {
-          _controller.text = '';
-          _hasdeleteIcon = false;
-        });
+      
+        _controller.text = '';
+        _hasdeleteIcon = false;
+     
       }),
       child: Icon(
         Icons.clear,
@@ -235,26 +266,43 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
       ));
                      
   } 
- 
-  Widget get _backIcon {
+  
+  Widget get _backBtn {
 
-    return Container(
-      height: widget.inputBoxHeight,
-      margin: EdgeInsetsDirectional.only(top: 30.0),
-      child: InkWell(
-        onTap: (){
-          Navigator.pop(context);
-        },
-        child: Padding(
-          padding: EdgeInsetsDirectional.only(start: 10,end: 10),
-          child: Icon(Icons.arrow_back,size: 24, color: widget.fontColor),
+    return 
+       Container(
+        margin: EdgeInsetsDirectional.only(start: 10),
+        width: 34,
+        height: 34,
+        decoration: BoxDecoration(
+          color: Colors.black12,
+          borderRadius: BorderRadius.circular(34)
+
         ),
-      )
+        child: IconButton(
+          onPressed: (){Navigator.pop(context);},
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black45,
+            size: 16,
+          ),
+        ),
+      );
+  }
+  
+  //跳转搜索页面
+  void _jumpToSearch() {
+    NavigatorUtil.push(
+      context,
+      SearchPage()
     );
   }
 
-
-
 }
+
+ 
+
+
+ 
 
  

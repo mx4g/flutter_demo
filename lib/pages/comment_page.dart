@@ -83,9 +83,11 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
-      body: Container(
-        child:  _commentBlock,
-      ) ,
+      body: SafeArea(
+        child: Container(
+          child:  _commentBlock,
+        ),
+      )
     );  
   }
   

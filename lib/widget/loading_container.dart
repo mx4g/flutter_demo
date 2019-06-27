@@ -15,7 +15,7 @@ class LoadingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !cover
-        ? !isLoading ? child : _loadingView
+        ? !isLoading ? child: _loadingView
         : Stack(
             children: <Widget>[child, isLoading ? _loadingView : null],
           );
