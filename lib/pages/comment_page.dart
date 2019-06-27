@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/gallery_Image_page.dart';
+import 'package:flutter_demo/util/bar_util.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/bottom_loading_container.dart';
 import 'package:flutter_demo/widget/circular_image.dart';
@@ -10,6 +11,7 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClientMixin{
+  
   final String userPic = 'http://upload.jianshu.io/users/upload_avatars/11894008/b4480698-f027-4b38-ac3e-adc39db6bc9c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120';
   final String comment = '刚到家没多会，外观手感还不错，家里停电，还没联网使用，用过再来追评';
   final String userName ='橘黄色的猫';
@@ -26,8 +28,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   bool loadMore = false; //上拉加载更多
   int  count = 10;
 
-   @override
-  // TODO: implement wantKeepAlive
+  @override
   bool get wantKeepAlive => true;
 
 
@@ -80,10 +81,19 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:  _commentBlock,
-    );    
+    return Scaffold(
+      appBar: _appBar,
+      body: Container(
+        child:  _commentBlock,
+      ) ,
+    );  
   }
+  
+  Widget get _appBar{
+   
+    return AppBarSetting(title:'评论').arrowBack(context);
+  }
+
 
   Widget get _comment {
 
@@ -105,7 +115,9 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
                ),
                Padding(
                  padding: EdgeInsets.only(left:4,top:8),
-                 child: Text(userName),
+                 child: Text(userName,
+                  style: TextStyle(color: Colors.black,fontSize: 16),
+                 ),
                )
                
             ],
@@ -118,6 +130,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
                   comment,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
+                  style: TextStyle(color: Colors.black,fontSize: 14),
                 ),
               ),
               Padding(

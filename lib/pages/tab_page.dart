@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/pages/tab/comment_page.dart';
 import 'package:flutter_demo/pages/tab/photo_wall_page.dart';
 
 class TabPage extends StatefulWidget {
@@ -53,9 +52,7 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
                   if(val=='照片墙'){
                     return PhotoWall();
                   }
-                  if(val=='评论'){
-                    return CommentPage();
-                  }
+                   
                   return  Text(val);
                 }).toList()),
           )

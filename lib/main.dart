@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/config/base_config.dart';
 import 'package:flutter_demo/navigator/tab_navigator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -8,11 +9,14 @@ class MyApp extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+ 
+    
     return  MaterialApp(
       title: 'Flutter_Demo',
       debugShowCheckedModeBanner: false,  // Flutter去除右上角Debug标签
       theme: ThemeData(
-         primaryColor: Color(0xFFC91B3A),
+        primaryColor: Color(ColorConfig.appBarColor),
+        backgroundColor: Color(ColorConfig.backgroundColor)
       ),
       localizationsDelegates: [                              
         GlobalMaterialLocalizations.delegate,

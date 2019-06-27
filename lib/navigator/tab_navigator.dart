@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_demo/pages/home_page.dart';
 import 'package:flutter_demo/pages/category_page.dart';
 import 'package:flutter_demo/pages/cart_page.dart';
-import 'package:flutter_demo/pages/my_page.dart';
+import 'package:flutter_demo/pages/member_page.dart';
 import 'package:flutter_demo/pages/tab_page.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
@@ -98,6 +99,9 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   Widget build(BuildContext context) {
 
+    //假如设计稿是按iPhone6的尺寸设计的(iPhone6 750*1334) 
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);  
+
     return  Scaffold(
 
       body:  WillPopScope(
@@ -109,8 +113,8 @@ class _TabNavigatorState extends State<TabNavigator> {
               HomePage(),
               CategoryPage(),
               CartPage(),
-              MyPage(),
-              TabPage()
+              MemberPage()
+          
             ],
         ),
 
@@ -133,8 +137,8 @@ class _TabNavigatorState extends State<TabNavigator> {
             _bottomItem(Icons.home, '首页', 0),
             _bottomItem(Icons.category, '分类', 1),
             _bottomItem(Icons.shopping_cart, '购物车', 2),
-            _bottomItem(Icons.account_circle, '我的', 3),
-            _bottomItem(Icons.tab, '导航', 4),
+            _bottomItem(Icons.account_circle, '我的', 3)
+          
           ]
         ),
     );

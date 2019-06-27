@@ -36,6 +36,7 @@ dependencies:
   lpinyin: ^1.0.7
   package_info: ^0.4.0+4
   flutter_spinkit: "^3.1.0"
+  flutter_screenutil: ^0.5.3
  
 
 dev_dependencies:

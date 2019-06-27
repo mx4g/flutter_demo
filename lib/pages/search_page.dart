@@ -16,10 +16,10 @@ class _SearchPageState extends State<SearchPage> {
 }
 
 
-  Widget _appBar(BuildContext context) {
+Widget _appBar(BuildContext context) {
 
-    return  SearchAppBarWidget(normalSearch: false);
-             
-  }
+  return  SearchAppBarWidget(normalSearch: false);
+            
+}
 
   

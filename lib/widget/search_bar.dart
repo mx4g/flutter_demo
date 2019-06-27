@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_demo/config/base_config.dart';
 
 //实现PreferredSizeWidget，否则不能作为appBar控件引用
 
@@ -11,8 +12,13 @@ class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final IconData prefixIcon;
   final VoidCallback onEditingComplete;
   final bool normalSearch;
+  final int inputBgColor;
+  final int barBgColorl;
+  final Color fontColor;
+  final double fontSize;
+  final double inputBoxHeight;
   final void Function() inputBoxClick;  
- 
+  
 
   const SearchAppBarWidget(
       {this.height: 76.0,
@@ -22,6 +28,11 @@ class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
       this.onEditingComplete,
       this.normalSearch = true,
       this.prefixIcon=Icons.search,
+      this.inputBgColor = 0xFFE6E6E6,
+      this.barBgColorl = ColorConfig.appBarColor,
+      this.fontColor = Colors.black38,
+      this.fontSize = 16,
+      this.inputBoxHeight = 34,
       this.inputBoxClick});
   
   _SearchAppBarState createState() =>  _SearchAppBarState();
@@ -34,11 +45,8 @@ class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
 class _SearchAppBarState extends State<SearchAppBarWidget> {
   bool _hasdeleteIcon = false;
   final TextEditingController _controller = TextEditingController();
-  final int themeColor = 0xFFC91B3A;
-  final double inputBoxHeight = 34;
-  final double fontSize = 16;
-  final Color fontColor = Colors.grey;
- 
+  int _grey = ColorConfig.grey3;
+
   @override
   Widget build(BuildContext context) {
      
@@ -55,7 +63,8 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
               Container(
                 height: widget.height,
                 decoration: BoxDecoration(
-                  color: Color(themeColor),
+                  color: Color(widget.barBgColorl),
+                  border: Border(bottom: BorderSide(color: Color(_grey)))
                 ),
               ),
               Row(
@@ -83,7 +92,8 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
          Container(
            height: widget.height,
            decoration: BoxDecoration(
-             color: Color(themeColor),
+             color: Color(widget.barBgColorl),
+             border: Border(bottom: BorderSide(color: Color(_grey)))
            ),
          ),         
          GestureDetector(
@@ -93,10 +103,10 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
               
            },
            child: Container(
-             height: inputBoxHeight,
+             height: widget.inputBoxHeight,
              margin: EdgeInsetsDirectional.only(start: 16.0,end: 16.0,top: 33.0),
              decoration: BoxDecoration(
-               color: Colors.white,
+               color: Color(widget.inputBgColor),
                borderRadius: BorderRadius.circular(4)
                
              ),
@@ -107,11 +117,11 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
                     child: Icon(
                         Icons.search,
                         size: 24,
-                        color: fontColor,
+                        color: widget.fontColor,
                     ),
                   ),
                   Text(
-                    widget.hintText,style: TextStyle(color: fontColor,fontSize: fontSize),                 
+                    widget.hintText,style: TextStyle(color: widget.fontColor,fontSize: widget.fontSize),                 
                   )
                 ],
            ),
@@ -134,8 +144,8 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: fontColor,
-          fontSize: fontSize,
+          color: widget.fontColor,
+          fontSize: widget.fontSize,
           
         ),
          
@@ -161,10 +171,10 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
   Widget get _inputBlock {
 
     return Container(
-      height: inputBoxHeight,
+      height: widget.inputBoxHeight,
       margin: EdgeInsetsDirectional.only(end: 10.0,top: 33.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(widget.inputBgColor),
         borderRadius: BorderRadius.circular(4)
       ),
       child: Row(
@@ -174,7 +184,7 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
             child: Icon(
                 Icons.search,
                 size: 24,
-                color: fontColor,
+                color: widget.fontColor,
             ),
           ),
           Expanded(
@@ -201,8 +211,7 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
         onPressed: (){
 
         },
-        child: Text("搜索"),
-        color: Colors.white,
+        child: Text("搜索",style: TextStyle(color: widget.fontColor),),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5)
         ),
@@ -222,7 +231,7 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
       child: Icon(
         Icons.clear,
         size: 18.0,
-        color: Colors.black,
+        color: widget.fontColor,
       ));
                      
   } 
@@ -230,14 +239,17 @@ class _SearchAppBarState extends State<SearchAppBarWidget> {
   Widget get _backIcon {
 
     return Container(
-      height: inputBoxHeight,
+      height: widget.inputBoxHeight,
       margin: EdgeInsetsDirectional.only(top: 30.0),
-      child: IconButton(
-        icon: Icon(Icons.arrow_back,size: 24, color: Colors.white),
-        highlightColor: Colors.black,
-        onPressed: () {
-            Navigator.pop(context);
-        }),
+      child: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: Padding(
+          padding: EdgeInsetsDirectional.only(start: 10,end: 10),
+          child: Icon(Icons.arrow_back,size: 24, color: widget.fontColor),
+        ),
+      )
     );
   }
 

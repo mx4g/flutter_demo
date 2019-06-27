@@ -17,7 +17,7 @@ class BottomLoadingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  
-         isLoadMore ?  _bottomloadMore : Text('');
+          _bottomloadMore;
         
   }
 
@@ -36,19 +36,30 @@ class BottomLoadingContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                height: 12,
-                width: 12,
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.cyan),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.only(start: 10),
-                child: Text('加载中...',style: TextStyle(color: Colors.black45),),
-              )
+             _circularProgressIndicator,
+             _loadingMsg
             ],
           ),
       ); 
+  }
+
+  Widget get _circularProgressIndicator {
+    return 
+      isLoadMore ? 
+      Container(
+        height: 12,
+        width: 12,
+        child: CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.cyan),
+        ),
+      ): Text('');
+  }
+
+  Widget get _loadingMsg {
+    var msg = isLoadMore? '加载中...' : '已经没有更多了';
+    return  Padding(
+      padding: EdgeInsetsDirectional.only(start: 10),
+      child: Text(msg, style: TextStyle(color: Colors.black45),),
+    );
   }
 }
