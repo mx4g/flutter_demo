@@ -112,7 +112,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   )
                     
                   ),
-                  child: Text(_leftMuenItem[index]['name'],style: TextStyle(fontSize: ScreenUtil().setSp(32),color: index  == _leftBtnCurrentIndex ? Colors.deepOrange : Color(_fontColor)),),
+                  child: Text(_leftMuenItem[index]['name'],style: TextStyle(fontSize: ScreenUtil().setSp(30),color: index  == _leftBtnCurrentIndex ? Colors.deepOrange : Color(_fontColor)),),
                 ),
             ),
           );
