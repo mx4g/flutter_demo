@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
 
     return 
       Container(
-        color: Color(_grey1),
+        color: Color(_backgroundColor),
         child:  ClipPath(
           clipper: TopClipper(),
           child: Container(
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   Widget get _categoryGrid {
     
     var list = ['新品','美妆','体育','娱乐','旅游','搞笑','音乐','电影','数码','生活用品'];
-    return CategoryGrid(list: list,height: ScreenUtil().setWidth(290),); 
+    return CategoryGrid(list: list,height: ScreenUtil().setHeight(284),); 
 
   }
 

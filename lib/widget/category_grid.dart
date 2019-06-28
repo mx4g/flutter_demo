@@ -9,19 +9,21 @@ class CategoryGrid extends StatelessWidget {
   final int crossAxisCount;
   final List<String> list;
   final double height;
+  final int backgourndColor;
 
   CategoryGrid({
     this.list,
     this.crossAxisCount = 5,
-    this.height
+    this.height,
+    this.backgourndColor = ColorConfig.backgroundColor,
     });
 
   @override
   Widget build(BuildContext context) {
-    int _backgroundColor = ColorConfig.grey1;
+ 
     
     return Container(
-      color: Color(_backgroundColor),
+      color: Color(backgourndColor),
       height: height,
       child:  GridView.count(
         crossAxisCount: 5,
@@ -54,7 +56,7 @@ class CategoryGrid extends StatelessWidget {
       height: ScreenUtil().setHeight(80),
       decoration: BoxDecoration(
         color: Colors.indigoAccent,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(80)),
       ),
     );
   }

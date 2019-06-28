@@ -26,7 +26,7 @@ class ImageContainer extends StatelessWidget {
     this.fontSize = 28,
     this.fontcolor = ColorConfig.fontColor2,
     this.priceFontSize = 30,
-    this.color = 0xffffffff,
+    this.color = ColorConfig.grey3,
     this.fit = BoxFit.fitWidth, 
   });
 
