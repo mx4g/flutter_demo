@@ -5,6 +5,7 @@ import 'package:flutter_demo/pages/search_page.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/image_container.dart';
 import 'package:flutter_demo/widget/search_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'detail_page.dart';
 import 'home_page/swiper_home_page.dart';
 
@@ -80,8 +81,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   Widget get _leftMenu {
     return Container(
-      width: 90,
-      
+      width: ScreenUtil().setWidth(187),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -112,7 +112,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   )
                     
                   ),
-                  child: Text(_leftMuenItem[index]['name'],style: TextStyle(fontSize: 14,color: index  == _leftBtnCurrentIndex ? Colors.deepOrange : Color(_fontColor)),),
+                  child: Text(_leftMuenItem[index]['name'],style: TextStyle(fontSize: ScreenUtil().setSp(32),color: index  == _leftBtnCurrentIndex ? Colors.deepOrange : Color(_fontColor)),),
                 ),
             ),
           );
@@ -124,8 +124,8 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget get _rightMenu {
 
     return Container(
-      width: MediaQuery.of(context).size.width - 90,
-      padding: EdgeInsetsDirectional.only(start: 8,top: 8,end: 8),
+      width: ScreenUtil().setWidth(563),
+      padding: EdgeInsetsDirectional.only(start: 6,top: 6,end: 6),
       child: Column(
         children: <Widget>[
           Expanded(
@@ -150,8 +150,8 @@ class _CategoryPageState extends State<CategoryPage> {
     var swiper = SwiperHomePage(bannerList: bannerList);   
     
     return Container(
-      height: 80,
-      padding: EdgeInsetsDirectional.only(bottom: 10),
+      height: ScreenUtil().setHeight(180),
+      padding: EdgeInsetsDirectional.only(bottom: 8),
       child: swiper.init(),
     );
   }
@@ -189,8 +189,8 @@ class _CategoryPageState extends State<CategoryPage> {
           );
         },
         child: ImageContainer(
-          width: 74,
-          height: 74,
+          width: ScreenUtil().setWidth(155),
+          height:  ScreenUtil().setHeight(155),
           title: item['name'],
           imageUrl: item['image'],
           maxLines: 1,

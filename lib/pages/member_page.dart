@@ -179,7 +179,7 @@ class MemberPage extends StatelessWidget {
   //头像
   Widget _userFacePic(){
     var url = 'https://img14.360buyimg.com/n7/jfs/t20131/219/1612938518/444249/f658a3af/5b2cfc67N8af9a5d5.jpg';
-    return CircularImage(imageURL: url,width: 50,height: 50,circular:50);
+    return CircularImage(imageURL: url,width: ScreenUtil().setWidth(120),height: ScreenUtil().setHeight(120),circular:110);
 
   }
 

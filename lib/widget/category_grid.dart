@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/base_config.dart';
 import 'package:flutter_demo/pages/test_page.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
  
 class CategoryGrid extends StatelessWidget {
  
   final int crossAxisCount;
   final List<String> list;
+  final double height;
 
   CategoryGrid({
     this.list,
-    this.crossAxisCount = 5});
+    this.crossAxisCount = 5,
+    this.height
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class CategoryGrid extends StatelessWidget {
     
     return Container(
       color: Color(_backgroundColor),
-      height: 140,
+      height: height,
       child:  GridView.count(
         crossAxisCount: 5,
         physics: NeverScrollableScrollPhysics(),
@@ -46,11 +50,11 @@ class CategoryGrid extends StatelessWidget {
   Widget get _pic {
 
     return Container(
-      width: 40,
-      height: 40,
+      width: ScreenUtil().setWidth(80),
+      height: ScreenUtil().setHeight(80),
       decoration: BoxDecoration(
         color: Colors.indigoAccent,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(30),
       ),
     );
   }
@@ -58,8 +62,8 @@ class CategoryGrid extends StatelessWidget {
   Widget _title(String text){
 
     return Padding(
-      padding: EdgeInsets.only(top: 3),
-      child: Text(text,style: TextStyle(fontSize: 12,color: Color(ColorConfig.fontColor1)),),
+      padding: EdgeInsets.only(top: ScreenUtil().setHeight(6)),
+      child: Text(text,style: TextStyle(fontSize: ScreenUtil().setSp(24),color: Color(ColorConfig.fontColor1)),),
     );
   }
 }

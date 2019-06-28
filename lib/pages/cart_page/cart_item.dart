@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/cart_page/cart_count.dart';
 import 'package:flutter_demo/widget/checkbox_container.dart';
 import 'package:flutter_demo/widget/image_container.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItem extends StatefulWidget {
   final String imageUrl;
@@ -39,9 +40,9 @@ class _CartItemState extends State<CartItem> {
  
   Widget get  _listItem {
     return Container(
-      padding: EdgeInsetsDirectional.only(end: 10,bottom: 6,top: 6),
-      height: 111,
-      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsetsDirectional.only(end: 8,bottom: 5,top: 5),
+      height: ScreenUtil().setHeight(230),
+      width: ScreenUtil().setWidth(750),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: Color(widget.goodsItemBorderBottomColor)))
       ),
@@ -58,10 +59,10 @@ class _CartItemState extends State<CartItem> {
     );
   }
 
-   Widget get _checkBoxBlock {
+  Widget get _checkBoxBlock {
 
     return Container(
-      padding: EdgeInsetsDirectional.only(start: 10,end: 6),
+      padding: EdgeInsetsDirectional.only(start: 8,end: 8),
       child: InkWell(
         onTap: (){},
         child: CheckBoxContainer.unCheckBox,
@@ -75,8 +76,8 @@ class _CartItemState extends State<CartItem> {
       InkWell(
         onTap: (){},
         child: ImageContainer(
-        width: 90,
-        height: 90,
+        width: ScreenUtil().setWidth(189),
+        height: ScreenUtil().setHeight(189),
         imageUrl: widget.imageUrl,
       ),
     );

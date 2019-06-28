@@ -7,7 +7,6 @@ import 'package:flutter_demo/widget/image_container.dart';
 import 'package:flutter_demo/widget/loading_container.dart';
 import 'package:flutter_demo/widget/search_bar.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
-import 'package:flutter_demo/pages/search_page.dart';
 import 'package:flutter_demo/widget/category_grid.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_demo/config/base_config.dart';
@@ -90,7 +89,10 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
            children: <Widget>[
              _banner,
              _categoryGrid,
-             _wrapList,
+             Container(
+               padding: EdgeInsetsDirectional.only(start: 10,end: 10),
+               child: _wrapList,
+             ),
               
            ],
          ),
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
         child:  ClipPath(
           clipper: TopClipper(),
           child: Container(
-            height: 130,
+            height: ScreenUtil().setWidth(240),
             child: swiper.init(),
           )
         ),
@@ -136,7 +138,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   Widget get _categoryGrid {
     
     var list = ['新品','美妆','体育','娱乐','旅游','搞笑','音乐','电影','数码','生活用品'];
-    return CategoryGrid(list: list); 
+    return CategoryGrid(list: list,height: ScreenUtil().setWidth(290),); 
 
   }
 
@@ -170,11 +172,11 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
           );
         },
         child:ImageContainer(
-        height: 168,
-        width:  MediaQuery.of(context).size.width /2 - 10,
-        price:  data[0]['price'],
-        title: data[0]['title'],
-        imageUrl: data[0]['image'],
+          height: ScreenUtil().setHeight(320),
+          width:  ScreenUtil().setWidth(330),
+          price:  data[0]['price'],
+          title: data[0]['title'],
+          imageUrl: data[0]['image'],
       ),
     );
     

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/comment_page.dart';
 import 'package:flutter_demo/pages/detail_page/swiper_detail_page.dart';
 import 'package:flutter_demo/util/bar_util.dart';
-import 'package:flutter_demo/util/common.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
-import 'package:flutter_demo/widget/app_bar_container.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
  
 
 class DetailPage extends StatefulWidget {
@@ -56,10 +55,13 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget get _listView {
     var swiper = SwiperDetailPage(bannerList: images); 
+    double padding =  6;
+    var fontSize = ScreenUtil().setSp(30);
+    var rowHeight =  ScreenUtil().setHeight(58);
     return ListView(
         children: <Widget>[
           Container(
-            height: 300,
+            height: ScreenUtil().setHeight(610),
             child: swiper.init(),
           ),
           
@@ -67,7 +69,7 @@ class _DetailPageState extends State<DetailPage> {
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: Color(0xffeeeeee),width: 5),bottom: BorderSide(color: Color(0xffeeeeee),width: 5)),
+              border: Border(top: BorderSide(color: Color(0xffeeeeee),width:6),bottom: BorderSide(color: Color(0xffeeeeee),width: 6)),
               
             ),
             child: Column(
@@ -76,7 +78,7 @@ class _DetailPageState extends State<DetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.all(6),
+                    padding: EdgeInsets.all(padding),
                     child: Text('￥2999',style: TextStyle(color: Colors.deepOrange),),
                   )
 
@@ -87,7 +89,7 @@ class _DetailPageState extends State<DetailPage> {
                   Expanded(
                     child: 
                       Padding(
-                        padding: EdgeInsetsDirectional.only(start: 6,bottom: 6,end: 6),
+                        padding: EdgeInsets.all(padding),
                         child: Text('小八同学2019春季新款私服推荐女小女人粉色圆领长袖显白显胸',
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -110,83 +112,90 @@ class _DetailPageState extends State<DetailPage> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('发货',style: TextStyle(color: Colors.black38,fontSize: 14),),
-                      ),
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('浙江发货',style: TextStyle(color: Colors.black,fontSize: 14),),
-                      )
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('发货',style: TextStyle(color: Colors.black38,fontSize: fontSize),),
+                     ),
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('浙江发货',style: TextStyle(color: Colors.black,fontSize: fontSize),),
+                    )
                     
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('服务',style: TextStyle(color: Colors.black38,fontSize: 14),),
-                      ),
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('7天无理由退货',style: TextStyle(color: Colors.black,fontSize: 14),),
-                      )
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('服务',style: TextStyle(color: Colors.black38,fontSize: fontSize),),
+                    ),
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('7天无理由退货',style: TextStyle(color: Colors.black,fontSize: fontSize),),
+                    )
                     
                   ],
                 ),
+               
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('选择',style: TextStyle(color: Colors.black38,fontSize: 14),),
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('选择',style: TextStyle(color: Colors.black38,fontSize: fontSize),),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(6),
-                          child: Text('选择 尺码，主要颜色',style: TextStyle(color: Colors.black,fontSize: 14),),
+                        Container(
+                          height: rowHeight,
+                          padding: EdgeInsets.all(padding),
+                          child: Text('选择 尺码，主要颜色',style: TextStyle(color: Colors.black,fontSize: fontSize),),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(6),
+                          padding: EdgeInsets.all(padding),
                           child: Row(
                             children: <Widget>[
                               Container(
                                 margin: EdgeInsetsDirectional.only(end: 10),
                                 alignment: Alignment.center,
-                                width: 20,
-                                height: 20,
+                                width: ScreenUtil().setWidth(46),
+                                height: ScreenUtil().setHeight(46),
                                 decoration: BoxDecoration(
                                   color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
                                 ),
-                                child: Text('S',style: TextStyle(fontSize: 12),),
+                                child: Text('S',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                               ),
                               Container(
                                 margin: EdgeInsetsDirectional.only(end: 10),
                                 alignment: Alignment.center,
-                                width: 20,
-                                height: 20,
+                                width: ScreenUtil().setWidth(46),
+                                height: ScreenUtil().setHeight(46),
                                 decoration: BoxDecoration(
                                   color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
                                 ),
-                                child: Text('M',style: TextStyle(fontSize: 12),),
+                                child: Text('M',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                               ),
                               Container(
-                                margin: EdgeInsetsDirectional.only(end: 5),
+                                margin: EdgeInsetsDirectional.only(end: 6),
                                 alignment: Alignment.center,
-                                width: 100,
-                                height: 20,
+                                width: ScreenUtil().setHeight(222),
+                                height: ScreenUtil().setWidth(46),
                                 decoration: BoxDecoration(
                                   color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
                                 ),
-                                child: Text('目前就只有这两款',style: TextStyle(fontSize: 12),),
+                                child: Text('目前就只有这两款',style: TextStyle(fontSize: ScreenUtil().setSp(26)),),
                               ),
                             ],
                           )
@@ -198,16 +207,19 @@ class _DetailPageState extends State<DetailPage> {
 
                 Row(
                   children: <Widget>[
-                     Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('参数',style: TextStyle(color: Colors.black38,fontSize: 14),),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Text('面料 尺码...',style: TextStyle(color: Colors.black,fontSize: 14),),
-                     )
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('参数',style: TextStyle(color: Colors.black38,fontSize: fontSize),),
+                      ),
+                    Container(
+                      height: rowHeight,
+                      padding: EdgeInsets.all(padding),
+                      child: Text('面料 尺码...',style: TextStyle(color: Colors.black,fontSize: fontSize),),
+                      )
+                    
                   ],
-                )
+                ),
 
                 
               ],
@@ -216,7 +228,7 @@ class _DetailPageState extends State<DetailPage> {
           
           //评论
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsetsDirectional.only(start: 12,top: 6,bottom: 6,end: 12),
             decoration: BoxDecoration(
               border: Border(top: BorderSide(color: Color(0xffeeeeee),width: 5),bottom: BorderSide(color: Color(0xffeeeeee),width: 5)),
             ),
@@ -225,7 +237,7 @@ class _DetailPageState extends State<DetailPage> {
                 Row(
                   children: <Widget>[
                     Padding(
-                        padding: EdgeInsets.all(6),
+                        padding: EdgeInsets.all(padding),
                         child: Text('宝贝评价(101)',style: TextStyle(color: Colors.black,fontSize: 14),),
                       ),
                     
@@ -237,7 +249,7 @@ class _DetailPageState extends State<DetailPage> {
                            onTap:  _jumpToCommentPage,
                            
                            child: Container(
-                            padding: EdgeInsets.all(6),
+                            padding: EdgeInsets.all(padding),
                             alignment: Alignment.centerRight,
                             child: Text('查看全部 >',style: TextStyle(color: Colors.deepOrange,fontSize: 14),),
                             ),

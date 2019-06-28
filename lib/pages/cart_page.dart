@@ -4,6 +4,7 @@ import 'package:flutter_demo/pages/cart_page/cart_item.dart';
 import 'package:flutter_demo/widget/app_bar_container.dart';
 import 'package:flutter_demo/widget/bottom_loading_container.dart';
 import 'package:flutter_demo/widget/checkbox_container.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class CartPage extends StatefulWidget {
@@ -56,15 +57,15 @@ class _CartPageState extends State<CartPage> {
   Widget get _appBar {
  
    return AppBarContainer(
-     title: Text('购物车',style: TextStyle(color: Colors.black, fontSize: 18),),
+     title: Text('购物车',style: TextStyle(color: Colors.black, fontSize: ScreenUtil().setSp(36)),),
      actions:<Widget>[
        Padding(
-         padding: EdgeInsetsDirectional.only(end: 20),
+         padding: EdgeInsetsDirectional.only(end: 18),
          child:Row(
            children: <Widget>[
              InkWell(
                onTap: (){},
-               child: Text('编辑',style: TextStyle(color: Colors.grey, fontSize: 14),),
+               child: Text('编辑',style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(30)),),
               ),
            ],
          )
@@ -75,8 +76,8 @@ class _CartPageState extends State<CartPage> {
 
   Widget get _topPart {
     return Container(
-      height: 40,
-      width: MediaQuery.of(context).size.width,
+      height: ScreenUtil().setHeight(84),
+      width: ScreenUtil().setWidth(750),
       decoration: BoxDecoration(
         color: Color(_grey3),
         border: Border(bottom: BorderSide(color: Color(_grey4)))
@@ -94,7 +95,7 @@ class _CartPageState extends State<CartPage> {
   Widget get _checkBoxBlock {
 
     return Container(
-      padding: EdgeInsetsDirectional.only(start: 10,end: 6),
+      padding: EdgeInsetsDirectional.only(start: 8,end: 8),
       child: CheckBoxContainer.unCheckBox,
     );
   }
