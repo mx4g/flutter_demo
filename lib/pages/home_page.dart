@@ -146,6 +146,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
  
     return Wrap(
       spacing: 2,
+      alignment: WrapAlignment.center,
       children: _imageBox,
        
     );

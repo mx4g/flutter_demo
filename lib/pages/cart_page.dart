@@ -99,8 +99,7 @@ class _CartPageState extends State<CartPage> {
       child: CheckBoxContainer.unCheckBox,
     );
   }
-
-  
+ 
   Widget get _checkBoxAllMsg {
 
     return Padding(
@@ -108,9 +107,7 @@ class _CartPageState extends State<CartPage> {
       child: Text('选择所有',style: TextStyle(color: Color(_fontColor2)),),
     );
   }
- 
- 
-
+  
   Widget get _shoppingCarListItem {
 
     return Expanded(

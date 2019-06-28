@@ -41,7 +41,7 @@ class _CartItemState extends State<CartItem> {
   Widget get  _listItem {
     return Container(
       padding: EdgeInsetsDirectional.only(end: 8,bottom: 5,top: 5),
-      height: ScreenUtil().setHeight(230),
+      height: ScreenUtil().setHeight(244),
       width: ScreenUtil().setWidth(750),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: Color(widget.goodsItemBorderBottomColor)))
