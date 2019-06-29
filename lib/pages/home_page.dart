@@ -7,7 +7,7 @@ import 'package:flutter_demo/widget/image_container.dart';
 import 'package:flutter_demo/widget/loading_container.dart';
 import 'package:flutter_demo/widget/search_bar.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
-import 'package:flutter_demo/widget/category_grid.dart';
+import 'package:flutter_demo/widget/sub_nav.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_demo/config/base_config.dart';
 
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
 
   bool _loading = true; //页面加载状态
   int _backgroundColor = ColorConfig.backgroundColor;
-  int _grey1 = ColorConfig.grey1;
+
   var data = [{'image':'https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/3468644741/O1CN01pyeQUk1ktQGL9rhpt_!!3468644741.jpg',
                 'title':'恶搞图 禁止砍伐环保 2019夏半袖衣服网红ins短袖T恤男情侣宽松潮',
                 'price':'58.00'
@@ -87,13 +87,18 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
          body: ListView(
            controller: _scrollController,
            children: <Widget>[
+
              _banner,
-             _categoryGrid,
+
              Container(
-               padding: EdgeInsetsDirectional.only(start: 10,end: 10),
-               child: _wrapList,
+               padding: EdgeInsetsDirectional.only(start: 12,end: 12),
+               child: Column(
+                 children: <Widget>[
+                   _categoryGrid,
+                   _wrapList
+                 ],
+               ),
              ),
-              
            ],
          ),
       ),
@@ -134,11 +139,11 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
    
   }
 
-  //类别表格  
+  //子导航  
   Widget get _categoryGrid {
     
     var list = ['新品','美妆','体育','娱乐','旅游','搞笑','音乐','电影','数码','生活用品'];
-    return CategoryGrid(list: list,height: ScreenUtil().setHeight(284),); 
+    return SubNav(subNavList: list,height: ScreenUtil().setHeight(290),); 
 
   }
 
@@ -173,9 +178,9 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
           );
         },
         child:ImageContainer(
-          height: ScreenUtil().setHeight(320),
-          width:  ScreenUtil().setWidth(330),
-          price:  data[0]['price'],
+          height: ScreenUtil().setHeight(318),
+          width:  ScreenUtil().setWidth(318),
+          price: data[0]['price'],
           title: data[0]['title'],
           imageUrl: data[0]['image'],
       ),

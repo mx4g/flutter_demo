@@ -159,7 +159,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget _rightMenuSubBtn(item){
     return 
       Wrap(
-        spacing: 3,
+        spacing: 2,
         children: _rightSubMenuData(),
       );
     
