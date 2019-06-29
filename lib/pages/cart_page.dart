@@ -12,7 +12,7 @@ class CartPage extends StatefulWidget {
   _CartPageState createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends State<CartPage> with  AutomaticKeepAliveClientMixin {
 
   int _grey3 = ColorConfig.grey3;
   int _grey4 = ColorConfig.grey4;
@@ -42,7 +42,13 @@ class _CartPageState extends State<CartPage> {
   int count = 4;
 
   @override
+  bool get wantKeepAlive => true;
+  
+
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return  Scaffold(
       appBar: _appBar,
       body: Column(
@@ -144,7 +150,7 @@ class _CartPageState extends State<CartPage> {
     }
     return BottomLoadingContainer(isLoadMore: false,);
   }
-  
+
 
 
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/base_config.dart';
-import 'package:flutter_demo/pages/search_page.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/image_container.dart';
 import 'package:flutter_demo/widget/search_bar.dart';
@@ -16,7 +15,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClientMixin {
                   
             
   var _leftMuenItem = [
@@ -57,8 +56,13 @@ class _CategoryPageState extends State<CategoryPage> {
 
   int _fontColor = ColorConfig.fontColor2;
  
+  
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return  Scaffold(
       appBar: _appBar,
       backgroundColor: Color(_grey2),
@@ -207,5 +211,6 @@ class _CategoryPageState extends State<CategoryPage> {
     });
 
   }
+
 
 }

@@ -69,11 +69,11 @@ class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixi
     });
   }
 
- 
+  
  
   @override
   Widget build(BuildContext context) {
- 
+    super.build(context); //解决Navigator.pop(context)重复刷新问题
     return Container(
       child: LoadingContainer(
         isLoading: _loading,

@@ -14,7 +14,7 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailPageState extends State<DetailPage> with AutomaticKeepAliveClientMixin {
 
   var images = [
         'https://img.alicdn.com/imgextra/i2/374826388/O1CN01yRhGml1x3kZNimzyU_!!374826388.jpg',
@@ -34,8 +34,11 @@ class _DetailPageState extends State<DetailPage> {
   }     
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-     
+    super.build(context);
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -293,6 +296,8 @@ class _DetailPageState extends State<DetailPage> {
         ],
       );
   }
+
+
 
 
 }
