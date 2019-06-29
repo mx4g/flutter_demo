@@ -193,6 +193,7 @@ class _CategoryPageState extends State<CategoryPage> {
           height:  ScreenUtil().setHeight(155),
           title: item['name'],
           imageUrl: item['image'],
+          color: ColorConfig.backgroundColor,
           maxLines: 1,
           ) 
         
