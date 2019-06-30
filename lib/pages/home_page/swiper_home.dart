@@ -4,9 +4,9 @@ import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/cached_image.dart';
 import 'package:flutter_demo/widget/swiper_block.dart';
 
-class SwiperCategoryPage {
+class SwiperHome {
   final List<String>  bannerList;
-  SwiperCategoryPage({
+  SwiperHome({
     this.bannerList
   });
 

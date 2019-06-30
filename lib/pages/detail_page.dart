@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_demo/pages/comment_page.dart';
-import 'package:flutter_demo/pages/detail_page/swiper_detail_page.dart';
+import 'package:flutter_demo/pages/detail_page/bottom_dialog_detail.dart';
+import 'package:flutter_demo/pages/detail_page/swiper_detail.dart';
 import 'package:flutter_demo/util/bar_util.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +47,7 @@ class _DetailPageState extends State<DetailPage> with AutomaticKeepAliveClientMi
         child: Container(
           child: Scaffold(
             appBar: _appBar,
-            body: _listView
+            body: _listView,
           ),
         ),
       ) ,
@@ -57,7 +59,7 @@ class _DetailPageState extends State<DetailPage> with AutomaticKeepAliveClientMi
   }
 
   Widget get _listView {
-    var swiper = SwiperDetailPage(bannerList: images); 
+    var swiper = SwiperDetail(bannerList: images); 
     double padding =  6;
     var fontSize = ScreenUtil().setSp(30);
     var rowHeight =  ScreenUtil().setHeight(58);
@@ -164,42 +166,52 @@ class _DetailPageState extends State<DetailPage> with AutomaticKeepAliveClientMi
                           padding: EdgeInsets.all(padding),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsetsDirectional.only(end: 10),
-                                alignment: Alignment.center,
-                                width: ScreenUtil().setWidth(46),
-                                height: ScreenUtil().setHeight(46),
-                                decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
+                              InkWell(
+                                onTap: (){_showModalBottomSheetDialog(context);},
+                                child: Container(
+                                  margin: EdgeInsetsDirectional.only(end: 10),
+                                  alignment: Alignment.center,
+                                  width: ScreenUtil().setWidth(46),
+                                  height: ScreenUtil().setHeight(46),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
+                                  ),
+                                  child: Text('S',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                                 ),
-                                child: Text('S',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                               ),
-                              Container(
-                                margin: EdgeInsetsDirectional.only(end: 10),
-                                alignment: Alignment.center,
-                                width: ScreenUtil().setWidth(46),
-                                height: ScreenUtil().setHeight(46),
-                                decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
+                              InkWell(
+                                onTap: (){_showModalBottomSheetDialog(context);},
+                                child: Container(
+                                  margin: EdgeInsetsDirectional.only(end: 10),
+                                  alignment: Alignment.center,
+                                  width: ScreenUtil().setWidth(46),
+                                  height: ScreenUtil().setHeight(46),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
+                                  ),
+                                  child: Text('M',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                                 ),
-                                child: Text('M',style: TextStyle(fontSize: ScreenUtil().setSp(24)),),
                               ),
-                              Container(
-                                margin: EdgeInsetsDirectional.only(end: 6),
-                                alignment: Alignment.center,
-                                width: ScreenUtil().setHeight(222),
-                                height: ScreenUtil().setWidth(46),
-                                decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
+                              InkWell(
+                                onTap: (){_showModalBottomSheetDialog(context);},
+                                child:  Container(
+                                  margin: EdgeInsetsDirectional.only(end: 6),
+                                  alignment: Alignment.center,
+                                  width: ScreenUtil().setHeight(222),
+                                  height: ScreenUtil().setWidth(46),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(ScreenUtil().setWidth(12))
 
+                                  ),
+                                  child: Text('目前就只有这两款',style: TextStyle(fontSize: ScreenUtil().setSp(26)),),
                                 ),
-                                child: Text('目前就只有这两款',style: TextStyle(fontSize: ScreenUtil().setSp(26)),),
-                              ),
+                              )
+                             
                             ],
                           )
                         )
@@ -297,7 +309,62 @@ class _DetailPageState extends State<DetailPage> with AutomaticKeepAliveClientMi
       );
   }
 
+   //showModalBottomSheet与BottomSheet的区别是 BottomSheet充满屏幕，ModalBottomSheet半屏
+  void _showModalBottomSheetDialog2(BuildContext context)  {
 
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return new Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+              ),
+              child: 
+                   GestureDetector(
+                     onTap: (){},
+                     onVerticalDragDown: (DragDownDetails details){},
+                     child: Column(
+                       children: <Widget>[
+                         new ListTile(
+                           leading: new Icon(Icons.chat),
+                           title: new Text("AAAA"),
+                         ),
+                         new ListTile(
+                           leading: new Icon(Icons.help),
+                           title: new Text("BBBBB"),
+                         ),
+                         new ListTile(
+                           leading: new Icon(Icons.settings),
+                           title: new Text("CCCCC"),
+                         ),
+                         new ListTile(
+                           leading: new Icon(Icons.more),
+                           title: new Text("DDDDD"),
+                         ),
+                         Expanded(
+                           child: Container(
+                             color: Colors.red,
+                           ),
+                         )
+                        
+                       ],
+                     ),
+                   )
+           
+          );
+        });
 
+    
+ 
+  }
 
+  void _showModalBottomSheetDialog(BuildContext context){
+
+     BottomDialogDetail().showModalBottomSheetDialog(context);
+     
+
+  }
 }

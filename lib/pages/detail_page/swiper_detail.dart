@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/widget/cached_image.dart';
 import 'package:flutter_demo/widget/swiper_block.dart';
 
-class SwiperDetailPage {
+class SwiperDetail {
   final List<String>  bannerList;
   final bool isNumberPagination;
-  SwiperDetailPage({
+  SwiperDetail({
     this.bannerList,
     this.isNumberPagination = true,
   });

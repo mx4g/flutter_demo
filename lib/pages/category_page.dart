@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/base_config.dart';
+import 'package:flutter_demo/pages/category_page/swiper_category.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
 import 'package:flutter_demo/widget/image_container.dart';
 import 'package:flutter_demo/widget/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'detail_page.dart';
-import 'home_page/swiper_home_page.dart';
 
 class CategoryPage extends StatefulWidget {
  
@@ -151,7 +151,7 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
                        'https://img.alicdn.com/simba/img/TB1HThXc.GF3KVjSZFoSuvmpFXa.jpg',
                        'https://img.alicdn.com/tfs/TB1WYMlcliE3KVjSZFMXXbQhVXa-520-280.jpg_q90_.webp'
                        ];
-    var swiper = SwiperHomePage(bannerList: bannerList);   
+    var swiper = SwiperCategory(bannerList: bannerList);   
     
     return Container(
       height: ScreenUtil().setHeight(180),

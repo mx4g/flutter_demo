@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/detail_page.dart';
-import 'package:flutter_demo/pages/home_page/swiper_home_page.dart';
+import 'package:flutter_demo/pages/home_page/swiper_home.dart';
 import 'package:flutter_demo/util/clipper_util.dart';
 import 'package:flutter_demo/widget/bottom_loading_container.dart';
 import 'package:flutter_demo/widget/image_container.dart';
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                        'https://img.alicdn.com/simba/img/TB1HThXc.GF3KVjSZFoSuvmpFXa.jpg',
                        'https://img.alicdn.com/tfs/TB1WYMlcliE3KVjSZFMXXbQhVXa-520-280.jpg_q90_.webp'
                        ];
-    var swiper = SwiperHomePage(bannerList: bannerList);    
+    var swiper = SwiperHome(bannerList: bannerList);    
 
     return 
       Container(
