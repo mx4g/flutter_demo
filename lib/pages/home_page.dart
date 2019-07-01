@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/pages/detail_page.dart';
 import 'package:flutter_demo/pages/home_page/swiper_home.dart';
+import 'package:flutter_demo/pages/new_product_page.dart';
 import 'package:flutter_demo/util/clipper_util.dart';
 import 'package:flutter_demo/widget/bottom_loading_container.dart';
 import 'package:flutter_demo/widget/image_container.dart';
@@ -143,7 +144,13 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   Widget get _categoryGrid {
     
     var list = ['新品','美妆','体育','娱乐','旅游','搞笑','音乐','电影','数码','生活用品'];
-    return SubNav(subNavList: list,height: ScreenUtil().setHeight(290),); 
+    return SubNav(
+      subNavList: list,height: 
+      ScreenUtil().setHeight(290),
+      onClick: (String val){
+        NavigatorUtil.push(context, NewProductPge(title:val,type: 1,));
+      },
+    ); 
 
   }
 

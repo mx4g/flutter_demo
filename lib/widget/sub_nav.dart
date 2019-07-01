@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/base_config.dart';
+import 'package:flutter_demo/pages/new_product_page.dart';
 import 'package:flutter_demo/pages/test_page.dart';
 import 'package:flutter_demo/util/navigator_util.dart';
  
@@ -9,12 +10,14 @@ class SubNav extends StatelessWidget {
   final List<String> subNavList;
   final double height;
   final int backgourndColor;
+  final void Function(String val) onClick;
 
   SubNav({
     this.subNavList,
     this.crossAxisCount = 5,
     this.height,
     this.backgourndColor = ColorConfig.backgroundColor,
+    this.onClick,
     });
 
   @override
@@ -60,16 +63,16 @@ class SubNav extends StatelessWidget {
   } 
 
 
-  Widget _item(context, text){
+  Widget _item(context, val){
 
     return Expanded(
       flex: 1,
       child: InkWell(
-        onTap: (){ NavigatorUtil.push(context, TestPage());   },
+        onTap: (){ onClick(val); },
         child: Column(
           children: <Widget>[
             _pic,
-            _title(text)
+            _title(val)
           ],
         ),
       ),
@@ -88,11 +91,11 @@ class SubNav extends StatelessWidget {
     );
   }
 
-  Widget _title(String text){
+  Widget _title(String val){
 
     return Padding(
       padding: EdgeInsets.only(top: 3),
-      child: Text(text,style: TextStyle(fontSize: 12,color: Color(ColorConfig.fontColor1)),),
+      child: Text(val,style: TextStyle(fontSize: 12,color: Color(ColorConfig.fontColor1)),),
     );
   }
 }
